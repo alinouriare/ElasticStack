@@ -1,0 +1,11 @@
+path cmd
+C:\Elastic\elasticsearch-7.10.2\bin
+elasticsearch
+---------------------------------
+http://localhost:9200/
+-----------------------------------------
+path cmd
+C:\Elastic\kibana-7.10.2-windows-x86_64\bin
+kibana.bat
+http://localhost:5601/
+------------------------------

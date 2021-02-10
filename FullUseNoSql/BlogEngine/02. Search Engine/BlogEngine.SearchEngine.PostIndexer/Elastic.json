@@ -1,0 +1,29 @@
+PUT posts 
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "std": {
+          "type": "standard",
+          "stopwords": "_persian_"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "Title": {
+        "type": "text",
+        "analyzer": "std"
+      },
+      "ShortDescription": {
+        "type": "text",
+        "analyzer": "std"
+      },    
+      "Body": {
+        "type": "text",
+        "analyzer": "std"
+      }
+    }
+  }
+}

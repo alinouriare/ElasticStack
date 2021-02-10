@@ -1,0 +1,157 @@
+// ایجاد ایندکس برای ثبت داده‌ها و جستجو روی آن‌ها
+PUT /products
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "analysis": {
+      "analyzer": {}
+    }
+  },
+  "mappings": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "title": {
+          "type": "text"
+        },
+        "description": {
+          "type": "text"
+        },
+        "manufacturer": {
+          "type": "text"
+        },
+        "manufacturerRaw": {
+          "type": "keyword"
+        },
+        "price": {
+          "type": "scaled_float",
+          "scaling_factor": 100
+        }
+      }    
+  }
+}
+
+
+PUT /orders
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "analysis": {
+      "analyzer": {}
+    }
+  },
+  "mappings": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "orderdate": {
+          "type": "date"
+        }        
+      }
+    
+  }
+}
+// بررسی محدوده اطلاعات به کمک Range 
+// انواع مختلفی از Range پشتیبانی می‌شود و قابلیت بررسی با داده‌های مختلف وجود دارد.
+// بررسی محدوده قیمتی یک کالا
+GET /products/_search
+{
+  "query": {
+    "range": {
+      "price": {
+        "gte": 10,
+        "lte": 20
+      }
+    }
+  }
+}
+//می‌توان برای یافته‌ها امتیاز در نظر گرفت
+GET /products/_search
+{
+  "from": 0,
+  "size": 10,
+  "query": {
+    "range": {
+    "price": {
+        "gte": 10,
+        "lte": 20,
+        "boost": 2.2
+      }
+    }
+  }
+}
+//جستجوی تاریخ
+GET /orders/_search
+{
+  "query": {
+    "range" : {
+      "orderdate" : {
+        "gte": "2020-01-01",
+        "lte": "2020-01-10"
+      }
+    }
+  }
+}
+//ثبت فرمت برای تاریخ
+GET /orders/_search
+{
+  "query": {
+    "range" : {
+      "orderdate" : {
+        "gte": "01/01/2020",
+        "lte": "03/01/2020",
+        "format": "dd/MM/yyyy"
+      }
+    }
+  }
+}
+//امکان دریافت تاریخ جاری با now
+// امکان تغییر در داده‌ها به کمک اعمال ریاضی مثلا now-7d
+//y M w d h m s
+GET /orders/_search
+{
+  "query": {
+    "range" : {
+      "orderdate" : {
+        "gte": "now-10d",
+        "lte": "now"
+      }
+    }
+  }
+}
+
+//بررسی داشتن یا نداشتن یک فیلد
+GET /products/_search
+{
+"query": {
+    "exists": {
+      "field": "description"
+    }
+  }
+}
+// جستجوی عبارت دقیق با term
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "manufacturerRaw": "datis arian queshm"
+    }
+  }
+}
+//پیاده سازی term به صورت filter context
+GET /products/_search
+{
+  "query": {
+    "constant_score": {
+      "filter":{
+        "term": {
+          "manufacturerRaw": "datis arian queshm"
+        }
+      }
+    }
+  }
+}

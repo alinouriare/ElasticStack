@@ -1,0 +1,128 @@
+//میتوان به کوئری‌ها در صورت عدم دریافت امتیاز یک مقدار پیش‌فرض داد
+// این مقدار هنگام ترکیب کاربرد دارد
+//برخی جستجو‌ها با اینکه امتیاز اهمیت ندارد امتیاز دهی می‌کنند و باید آن‌ها را به امتیاز ثابت تبدیل کنیم
+
+GET /products/_search
+  {
+  "query": {
+  "term": {
+    "manufacturerRaw": "m01"
+  }
+  }
+}
+//تبدیل به مقدار ثابت1
+//بهبود عملکرد سیستم با توجه به عدم مقدار دهی
+GET /products/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "term": {
+          "manufacturerRaw": "m01"
+        }
+      }
+    }
+  }
+}
+// در صورت نیاز می‌توان این مقدار ثابت را نیز تعیین کرد
+GET /products/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "term": {
+          "manufacturerRaw": "m01"
+        }
+      },
+      "boost": 1.2
+    }
+  }
+}
+
+//پیاده سازی شرط OR
+
+GET /products/_search
+{
+  "query":{
+     "constant_score":{
+        "filter":{
+           "bool":{
+              "should":[
+                 {
+                    "range":{
+                       "price":{
+                          "gte":10,
+                          "lte":13
+                       }
+                    }
+                 },
+                 {
+                    "term":{
+                       "manufacturerRaw":{
+                          "value":"m01"
+                       }
+                    }
+                 }
+              ]
+           }
+        }
+     }
+  } 
+}
+//ترکیب شرط‌های OR و And
+GET /products/_search
+{
+  "query":{
+     "constant_score":{
+        "filter":{
+           "bool":{
+              "must":[
+                 {
+                    "range":{
+                       "price":{
+                          "gte":10,
+                          "lte":30
+                       }
+                    }
+                 }
+              ],
+              "should":[
+                 {
+                    "term":{
+                       "manufacturerRaw":{
+                          "value":"m01"
+                       }
+                    }
+                 },
+                 {
+                    "term":{
+                       "manufacturerRaw":{
+                          "value":"m03"
+                       }
+                    }
+                 }
+              ]
+           }
+        }
+     }
+  }
+}
+//پیاده سازی شرط not
+GET /products/_search
+{
+  "query":{
+     "constant_score":{
+        "filter":{
+           "bool":{
+              "must_not":[
+                 {
+                    "term":{
+                       "manufacturerRaw":"m01"
+                    }
+                 }
+              ]
+           }
+        }
+     }
+  }
+}

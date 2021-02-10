@@ -1,0 +1,4 @@
+run admin cmd
+bin\logstash -f file\logstash_network_traffic_data.conf
+
+logstash -f file\logstash_netflix_titles_nov_2019_data.conf

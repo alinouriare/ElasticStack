@@ -1,0 +1,9 @@
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\bin\Debug\netstandard2.1\BlogEngine.PostManagement.Models.deps.json
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\bin\Debug\netstandard2.1\BlogEngine.PostManagement.Models.dll
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\bin\Debug\netstandard2.1\BlogEngine.PostManagement.Models.pdb
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\obj\Debug\netstandard2.1\BlogEngine.PostManagement.Models.csprojAssemblyReference.cache
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\obj\Debug\netstandard2.1\BlogEngine.PostManagement.Models.AssemblyInfoInputs.cache
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\obj\Debug\netstandard2.1\BlogEngine.PostManagement.Models.AssemblyInfo.cs
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\obj\Debug\netstandard2.1\BlogEngine.PostManagement.Models.csproj.CoreCompileInputs.cache
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\obj\Debug\netstandard2.1\BlogEngine.PostManagement.Models.dll
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\01. Post Management\BlogEngine.PostManagement.Models\obj\Debug\netstandard2.1\BlogEngine.PostManagement.Models.pdb

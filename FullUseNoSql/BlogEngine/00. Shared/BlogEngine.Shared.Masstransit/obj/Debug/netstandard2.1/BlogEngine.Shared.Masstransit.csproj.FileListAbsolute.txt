@@ -1,0 +1,9 @@
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\bin\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.deps.json
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\bin\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.dll
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\bin\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.pdb
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\obj\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.csprojAssemblyReference.cache
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\obj\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.AssemblyInfoInputs.cache
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\obj\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.AssemblyInfo.cs
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\obj\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.csproj.CoreCompileInputs.cache
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\obj\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.dll
+C:\Users\alino\OneDrive\Desktop\MongoDb\Driver\02-UseNoSql\BlogEngine\00. Shared\BlogEngine.Shared.Masstransit\obj\Debug\netstandard2.1\BlogEngine.Shared.Masstransit.pdb

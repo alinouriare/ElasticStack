@@ -1,0 +1,102 @@
+GET /people/_search
+GET /people,person/_search
+
+
+
+
+PUT /people/_doc/2
+{
+  "name":"omid",
+  "age":34
+  
+}
+
+insert without id by use POST
+POST /people/_doc
+{
+  "name":"omid1",
+  "age":341
+  
+}
+------------------
+just get one document
+GET /people/_doc/2
+
+POST /people/_doc
+{
+  
+  "name":"ali",
+  "age":34
+}
+--------------------------------------
+put compit update
+update by filed
+
+POST /people/_update/2
+{
+"doc":
+{
+  
+  "name":"omidkhalegi"
+}}
+POST /people/_update/4
+{
+  
+  "doc": {
+    "name":"hamzeh"
+  }
+  , "doc_as_upsert": true
+}
+-----------------------------------------
+GET /people/_mapping
+--------------------------------
+DELETE /people/_doc/1
+-----------------------------------
+create index
+PUT /person 
+{
+  "settings": {
+    "index":{
+      "number_of_shards":7,
+     "number_of_replicas":2
+    }
+  }
+  
+}
+
+
+
+PUT /person/_mapping
+{
+  "properties":
+  {
+    "name":{
+      "type":"text"
+    }
+    
+  }
+}
+
+GET /person/_mapping
+-------------------------------------
+create index and mapping
+PUT /person1 
+{
+  "settings": {
+    "index":{
+      "number_of_shards":7,
+     "number_of_replicas":2
+    }
+  },
+  "mappings": {
+    "properties": {
+      "name":{
+        "type": "text"
+      },
+      "age":{
+        "type": "integer"
+      }
+    }
+  }
+  
+}

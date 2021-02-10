@@ -1,0 +1,107 @@
+// sum از گروه metric aggregationها
+//نتیجه جستجو همراه sum در اختیار ما قرار خواهد گرفت
+GET /bigginsight/_search
+{
+  "aggs": {
+    "download_sum": {
+      "sum": {
+        "field": "downloadTotal"
+      }
+    }
+  }
+}
+//avg از گروه metric aggregationها
+// میانگین یک فیلد عددی را محاسبه می‌کند
+//ساختار شبیه به sum
+GET /bigginsight/_search
+{
+  "aggs": {
+    "download_avg": {
+      "avg": {
+        "field": "downloadTotal"
+      }
+    }
+  },
+  "size": 0
+}
+//min از گروه metric aggregationها
+// کمترین مقدار یک فیلد عددی را به دست می‌اورد 
+//ساختار شبیه به sum
+GET /bigginsight/_search
+{
+  "aggs": {
+    "download_min": {
+      "min": {
+        "field": "downloadTotal"
+      }
+    }
+  },
+  "size": 0
+}
+//max از گروه metric aggregationها
+// بیشترین مقدار یک فیلد عددی را به دست می‌اورد 
+//ساختار شبیه به sum
+GET /bigginsight/_search
+{
+  "aggs": {
+    "download_max": {
+      "max": {
+        "field": "downloadTotal"
+      }
+    }
+  },
+  "size": 0
+}
+
+//state از گروه metric aggregationها
+// همه مقادیر قبلی را برای یک فیلد عددی را به دست می‌اورد 
+//ساختار شبیه به sum
+GET /bigginsight/_search
+{
+  "aggs": {
+    "download_stats": {
+      "stats": {
+        "field": "downloadTotal"
+      }
+    }
+  },
+  "size": 0
+}
+------------------------
+GET /bigginsight/_search?track_total_hits=true
+{
+  "aggs": {
+    "all": {
+      "stats": {
+        "field": "uploadCurrent"
+      }
+    }
+  },
+  "size": 0
+}
+//extended_stats از گروه metric aggregationها
+//توسعه ای نسبت به stats تعداد فیلد‌های بیشتر مثل انحراف معیار و واریانس
+//ساختار شبیه به sum
+GET /bigginsight/_search
+{
+  "aggs": {
+    "download_extended_stats": {
+      "extended_stats": {
+        "field": "downloadTotal"
+      }
+    }
+  },
+  "size": 0
+}
+// به دست آوردن تعداد منحصر به فرد از یک مقدار برای فیلد خاص به کمک cardinality
+GET /bigginsight/_search
+{
+  "aggs": {
+    "users_cardinality": {
+      "cardinality": {
+        "field": "username"
+      }
+    }
+  },
+  "size":0
+}

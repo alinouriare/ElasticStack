@@ -1,0 +1,8 @@
+run admin cmd
+C:\Elastic\logstash-7.10.2-windows-x86_64\logstash-7.10.2>bin\logstash.bat -f file\kiban.conf
+
+
+list plugin:
+http://localhost:5601/status
+
+kibana-plugin.bat install  https://github.com/johtani/analyze-api-ui-plugin/releases/download/7.2.0/analyze_api_ui-7.2.0.zip

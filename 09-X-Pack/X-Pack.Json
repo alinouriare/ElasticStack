@@ -1,0 +1,166 @@
+فعال سازی امنیت در تنظیمات الستیک سرچ
+xpack.security.enabled: true
+
+کاربران پیش‌فرض
+elastic, kibana, apm_system, remote_monitoring_user, beats_system, logstash_system
+
+.تنظیم پسورد برای کاربران پیش‌فرض
+نگهداری تنظیمات امنیتی در .security
+
+elasticsearch-setup-passwords interactive
+
+تنظیمات کیبانا برای اتصال به الستیک
+elasticsearch.username: "kibana"
+elasticsearch.password: "kibana"
+
+بعد از trial اینا فعال میشه
+تنظیمات xpack برای الستیک
+xpack.ml.enabled
+xpack.monitoring.enabled
+xpack.security.enabled
+xpack.watcher.enabled
+تنظیمات xpack برای کیبانا
+xpack.ml.enabled
+xpack.monitoring.enabled
+xpack.security.enabled
+xpack.graph.enabled
+xpack.reporting.enabled
+
+دریافت لیست همه کاربران
+GET /_security/user
+مشخصات یک کاربر خاص
+GET /_security/user/user1
+
+ایجاد یک کاربر
+POST /_xpack/security/user/user3
+{
+    "password": "3edc#EDC",
+    "roles": [
+        "monitor_role"
+    ],
+    "full_name": "user3",
+    "email": "user3@packt.com"
+}
+حذف یک کاربر خاص
+DELETE /_xpack/security/user/user2
+
+فعال و غیر فعال کردن یک کاربر خاص
+PUT /_xpack/security/user/user1/_disable
+PUT /_xpack/security/user/user1/_enable
+
+تغییر کلمه عبور
+
+PUT /_xpack/security/user/<username>/_password
+
+
+دریافت لیست نقش‌ها
+GET /_xpack/security/role
+
+دریافت یک نقش خاص
+GET /_xpack/security/role/testRole
+
+ایجاد یک نقش
+POST /_xpack/security/role/testRole
+{
+    "indices": [
+        {
+            "names": [
+                "employee"
+            ],
+            "privileges": [
+                "read"
+            ],
+            "field_security": {
+                "grant": [
+                    "*"
+                ],
+                "except": [
+                    "address*",
+                    "salary"
+                ]
+            }
+        }
+    ]
+}
+
+
+ساخت یک watch
+
+post /_xpack/watcher/watch/logstash_error_watch 
+{
+    "trigger": {
+        "schedule": {
+            "interval": "30s"
+        }
+    },
+    "input": {
+        "search": {
+            "request": {
+                "indices": [
+                    "logstash*"
+                ],
+                "body": {
+                    "query": {
+                        "match": {
+                            "message": "error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "condition": {
+        "compare": {
+            "ctx.payload.hits.total": {
+                "gt": 0
+            }
+        }
+    },
+    "actions": {
+        "log_error": {
+            "logging": {
+                "text": "The number of errors in logs is{{ctx.payload.hits.total}}"
+            }
+        }
+    }
+}
+
+اجرا در دقیقه 45
+امکان دریافت آرایه
+{
+    "trigger": {
+        "schedule": {
+            "hourly": {
+                "minute": 45
+            }
+        }
+    }
+}
+
+اجرا در ساعت 8 شب
+{
+    "trigger": {
+        "schedule": {
+            "daily": {
+                "at": "20:00"
+            }
+        }
+    }
+}
+اجرا در روزها و ساعات خاص
+{
+    "trigger": {
+        "schedule": {
+            "weekly": [
+                {
+                    "on": "monday",
+                    "at": "10:00"
+                },
+                {
+                    "on": "friday",
+                    "at": "20:00"
+                }
+            ]
+        }
+    }
+}

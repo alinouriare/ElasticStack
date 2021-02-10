@@ -1,0 +1,119 @@
+PUT /current
+HEAD /current
+GET /current
+DELETE /current
+
+---------------------------
+setting  =>dynamic/static
+POST /current/_close ========>not read write and process  ----for change setting static
+
+POST /current/_open ===>default
+-----------------------------------
+GET /student/_settings
+
+dynamic:
+PUT /student/_settings
+{
+  "index":{
+     "number_of_replicas": "2"
+  }
+}
+static:
+POST /student/_close
+
+PUT /student/_settings
+{
+  "codec": "best_compression"
+}
+------------------------------------
+template :
+
+PUT /_template/tec
+{
+  
+  "order": 2,
+  "index_patterns": ["news_*"], 
+  "settings": {
+    "number_of_replicas": 4
+  }
+}
+
+
+PUT /news_1/_doc/1
+{
+  "body":"11111111"
+}
+
+GET /news_1/_doc/1
+
+GET /news_1/_settings
+
+--------------------------------------------------
+Add Alias To Collection
+for change index p1 alias person  =>change p2 alias person p1 remove 
+PUT /student,person/_alias/sandp
+GET /sandp
+
+GET /sandp/_search
+GET /_alias
+-----------------------------------------------------
+Montoring:
+GET /student/_stats
+GET /student/_segments
+GET /student/_recovery  ===>replica sync master
+GET /student/_shard_stores
+-----------------------------------------------
+
+memmory buffer ======>segment ============>segemnts===========>disk  
+transactionlog
+POST /student/_cache/clear?query=true
+POST /student/_cache/clear?request=true
+POST /student/_cache/clear?fielddata=true
+
+memmory buffer ======>segment       ----------------->refrsh    by system per time - by user (POST /student/_refresh)
+segemnts===========>disk  transactionlog clean ---------------->flush  by system per time - by user(POST /student/_flush)
+-------------------------------------------------------
+split: up shard
+PUT /student/_settings
+{
+ "index.blocks.write": true
+  
+}
+
+POST /student/_split/student3
+{
+  "settings":{
+	"index.number_of_shards":4
+
+	}
+  
+}
+shirink:down shard
+
+PUT /doc/_settings
+{
+ "index.blocks.write": true
+  
+}
+
+POST /doc/_split/doc1
+{
+  "settings":{
+	"index.number_of_shards":16
+
+	}
+}
+
+PUT /doc1/_settings
+{
+"index.blocks.write": true
+  
+}
+
+POST /doc1/_shrink/docnew
+{
+  "settings":{
+	"index.number_of_shards":8
+
+	}
+}

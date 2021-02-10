@@ -1,0 +1,101 @@
+//جستجوی FullText یکی از پیچیده ترین‌ها
+//استفاده از match برای جستجوی متنی
+GET /products/_search
+{
+  "query": {
+    "match": {
+      "description": "Desc p01"
+    }
+  }
+}
+//امکان تعیین عملگر از نوع and
+GET /products/_search
+{
+  "query": {
+    "match": {
+      "description":{
+        "query": "Desc p01",
+        "operator":"and"
+      }
+
+    }
+  }
+}
+//تعیین تعداد
+GET /products/_search
+{
+  "query": {
+    "match": {
+      "description":{
+        "query": "Desc p01",
+        "minimum_should_match":"2"
+      }
+
+    }
+  }
+}
+// 1 اشتباه
+// 2 اشتباه کاراکتی
+// descriqtion   -- sample 
+// جستجوی فازی
+//مقادیر 0 1 2 و AUTO
+GET /products/_search
+{
+  "query": {
+    "match": {
+      "description":{
+        "query": "Desc p01",
+        "fuzziness":1
+      }
+
+    }
+  }
+}
+//جستجوی Match phrase
+// هنگامی استفاده می‌شود که ترتیب و توالی مهم باشد
+GET /products/_search
+{
+    "query": {
+      "match_phrase": {
+        "description": {
+         "query": "Desc p01"
+        }
+    }
+  }
+}
+
+//تعیین تعداد خطا
+//1 2 3
+GET /products/_search
+{
+    "query": {
+      "match_phrase": {
+        "description": {
+         "query": "Desc p01",
+         "slop": 1
+        }
+    }
+  }
+}
+
+//جستجو روی چندین فیلد به کمک multi match
+
+GET /products/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "p01",
+      "fields": ["title", "description"]
+    }
+  }
+}
+//ارزش گذاری روی یک فیلد
+GET /products/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "p01",
+      "fields": ["title^4", "description"]
+    }
+  }
+}

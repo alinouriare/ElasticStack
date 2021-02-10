@@ -1,0 +1,273 @@
+//بررسی عملکرد charfilter برای تحلیل متن
+// فیلتر کردن متن‌‌ها و تگ‌های HTML
+POST _analyze
+{
+  "char_filter":  [ "html_strip" ],
+  "text": "<p>I&apos;m so <b>happy</b>!</p>"
+}
+//بررسی کارکرد mapping در char_filter
+POST _analyze
+{
+  "char_filter":  
+  [ 
+    {
+        "type":"mapping", 
+        "mappings":[
+            "ي => ی",
+            "١ => 1",
+            "٢ => 2",
+            "٣ => 3",
+            "٤ => 4",
+            "٥ => 5",
+            "٦ => 6",
+            "٧ => 7",
+            "٨ => 8",
+            "٩ => 9"
+        ]
+    }
+  ],
+  "text": "١ روز رسد غمی به انداز کوه. ٨ سالم شده بود"
+}
+
+//بررسی عملکرد tokenizer استاندارد با ارسال یک متن
+//برای انجام این کار یک دستور post برای _analyze ارسال می‌کنیم
+//پارامتر tokenizer نوع آن را معلوم می‌کند که از نوع standard در نظر می‌گیریم.
+// پارامتر text متنی است که می‌خواهیم analyze شود
+POST _analyze
+{
+  "tokenizer": "standard",
+  "text": "The standard tokenizer divides text into terms on word boundaries, as defined by the Unicode Text Segmentation algorithm. It removes most punctuation symbols. It is the best choice for most languages."
+}
+
+POST _analyze
+{
+  "tokenizer": "standard",
+  "text": "بررسی عملکرد توکنایزر استاندارد با متن فارسی"
+}
+// بررسی عملکرد lowercase tokenizer و تبدیل حروف کوچک به حروف بزرگ
+POST _analyze
+{
+  "tokenizer": "lowercase",
+  "text": "The simple analyzer divides text into terms whenever it encounters a character which is not a letter. It lowercases all terms."
+}
+
+POST _analyze
+{
+  "tokenizer": "lowercase",
+  "text": "بررسی عملکرد توکنایزر حروف کوچک با متن فارسی"
+}
+//بررسی عملکرد token filterها بعد از انجام تمامی مراحل
+// استفاده از stop برای حذف stop worldها
+POST _analyze
+{
+  "tokenizer": "standard", 
+  "filter":[
+      {
+          "type":"stop",
+          "stopwords":  "_english_"
+      }    
+    ],
+    "text":"Token filters accept a stream of tokens from a tokenizer and can modify tokens (eg lowercasing), delete tokens (eg remove stopwords) or add tokens (eg synonyms)."
+}
+
+// بررسی تغییر لیست stopworkهای استاندارد و استفاده از نسخه فارسی
+POST _analyze
+{
+    "tokenizer":"standard",
+    "filter":[
+        {
+            "type":"stop",
+            "stopwords":"_persian_"
+        },
+        {
+          "type":"stop",
+          "stopwords":"_english_"
+        }
+    ],
+    "text":"به نام خداوند جان و خرد کزین برتر اندیشه بر نگذرد. خداوند جان و خداوند روح. این نام تو بهترین سرآغاز بی نام تو نامه کی کنم باز؟"
+}
+// ارسال لیست دلخواه برای کلمات بی استفاده
+POST _analyze
+{
+    "tokenizer":"standard",
+    "filter":[
+        {
+            "type":"stop",
+            "stopwords":["نامه", "اندیشه","جان","کزین"]
+        }
+    ],
+    "text":"به نام خداوند جان و خرد کزین برتر اندیشه بر نگذرد. خداوند جان و خداوند روح. این نام تو بهترین سرآغاز بی نام تو نامه کی کنم باز؟"
+}
+
+// تعدادی تحلیلگر تو کار که ترکیبی از چند ماژول بالا را همراه دارد وارد می‌شود
+// بررسی استفاده از تحلیل گر استاندارد
+POST _analyze
+{
+    "analyzer":"standard",
+    "text":"The standard analyzer is the default analyzer which is used if none is specified. It provides grammar based tokenization (based on the Unicode Text Segmentation algorithm, as specified in Unicode Standard Annex #29) and works well for most languages."
+}
+
+// انجام تنظیمات برای تحلیلگر استاندارد هنگام تعیین تحلیل‌گر برای یک index
+PUT my_index
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_english_analyzer": {
+          "type": "standard",
+          "max_token_length": 5,
+          "stopwords": "_english_"
+        }
+      }
+    }
+  }
+}
+
+POST my_index/_analyze
+{
+  "analyzer": "my_english_analyzer",
+  "text": "The 2 QUICK Brown-Foxes jumped over the lazy dog's bone."
+}
+
+// پیاده سازی یک analyzer دلخواه
+// پیاده سازی یک تحلیلگر دلخواه
+// تعیین نام و نوع از جنس costom ارسال یک تحلیلگر و تعدادی فیلتر و کاراکتر فیلتر
+PUT my_index
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_custom_analyzer": {
+          "type": "custom", 
+          "tokenizer": "standard",
+          "char_filter": [
+            "html_strip"
+          ],
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  }
+}
+
+POST my_index/_analyze
+{
+  "analyzer": "my_custom_analyzer",
+  "text": "Is this <b>déjà vu</b>?"
+}
+// پیاده سازی جستجوی سریع
+PUT /custom_analyzer_index
+{
+    "settings":{
+       "index":{
+          "analysis":{
+             "analyzer":{
+                "custom_analyzer":{
+                   "type":"custom",
+                   "tokenizer":"standard",
+                   "filter":[
+                      "lowercase",
+                      "custom_edge_ngram"
+                   ]
+                }
+             },
+             "filter":{
+                "custom_edge_ngram":{
+                   "type":"edge_ngram",
+                   "min_gram":2,
+                   "max_gram":20
+                }
+             }
+          }
+       }
+    },
+    "mappings":{
+       "properties":{
+          "product":{
+             "type":"text",
+             "analyzer":"custom_analyzer",
+             "search_analyzer":"standard"
+          }
+       }
+    }
+ }
+
+ POST /custom_analyzer_index/_doc
+{
+    "product": "Learning Elastic Stack 7"
+}
+
+POST /custom_analyzer_index/_doc
+{
+    "product": "Mastering Elasticsearch"
+}
+
+GET /custom_analyzer_index2/_search
+{
+"query": {
+"match": {
+"product": "elastics"
+}
+}
+}
+
+
+PUT /testpp
+{
+  
+   "settings":{  
+      "analysis":{  
+         "analyzer":{  
+            "custom_analyzerp":{  
+               "type":"custom",
+               "char_filter":[  
+                  "replace_special_characters"
+               ],
+               "tokenizer":"standard",
+               "filter":[  
+                  "lowercase"
+               ]
+            }
+         },
+         "char_filter":{  
+            "replace_special_characters":{  
+               "type":"mapping",
+               "mappings":[  
+                  ":) => happy",
+                  ":( => sad",
+                  "& => and"
+               ]
+            }
+         }
+      }
+   },
+   "mappings": {
+     "properties": {
+       "body":{
+         "type": "text",
+         "analyzer": "custom_analyzerp",
+         "search_analyzer": "standard"
+       }
+     }
+   }
+
+}
+GET /testpp/_search
+{
+  "query": {
+    "match": {
+      "body": "and"
+    }
+  }
+}
+
+POST /testpp/_doc
+{
+  
+  "body":"& ok salam & "
+}
+
+GET /testpp

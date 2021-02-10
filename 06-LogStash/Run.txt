@@ -1,0 +1,15 @@
+C:\Elastic\logstash-7.10.2-windows-x86_64\logstash-7.10.2\bin>logstash -e "input { stdin {}} output { stdout {}}"
+
+C:\Elastic\logstash-7.10.2-windows-x86_64\logstash-7.10.2\bin>logstash-plugin.bat
+list plugin:
+C:\Elastic\logstash-7.10.2-windows-x86_64\logstash-7.10.2\bin>logstash-plugin.bat list
+
+logstash-plugin.bat install <pluginname>
+logstash-plugin.bat update <pluginname>
+
+list input :
+https://www.elastic.co/guide/en/logstash/current/input-plugins.html
+
+
+File Input:
+C:\Elastic\logstash-7.10.2-windows-x86_64\logstash-7.10.2\bin>logstash -f ..\file\0.conf

@@ -1,0 +1,430 @@
+//دسته بندی‌ داده‌ها بر اساس یک فیلد متنی
+GET /bigginsight/_search
+{
+  "aggs": { 
+    "byCategory": { 
+      "terms": { 
+        "field": "category" 
+      }
+    }
+  },
+  "size": 0 
+}
+-----------------------------
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byApplication": {
+      "terms": {
+        "field": "application",
+        "size": 50,
+        
+      }
+    }
+  },
+  "size": 0
+}
+-----------------------------
+// امکان تعیین تعداد گروه های مورد نیاز
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byApplication": {
+      "terms": {
+        "field": "application",
+        "size": 50,
+        
+      }
+    }
+  },
+  "size": 0
+}
+
+
+//استفاده از histogram برای گروه بندی بر اساس داده‌های عددی
+
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byUsage": {
+      "histogram": {
+        "field": "usage",
+        "interval": 10000,
+         "min_doc_count": 3000
+      }
+    }
+  },
+"size": 0
+}
+// امکان تعیین حداقل داده‌ها در یک گروه
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byUsage": {
+      "histogram": {
+        "field": "usage",
+        "interval": 10000
+      }
+    }
+  },
+"size": 0
+}
+
+//استفاده از range برای دسته بندی عددی با بازه‌های متفاوت
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byUsage": {
+      "range": {
+        "field": "usage",
+        "ranges": [
+          {
+            "to": 100000
+          },
+          {
+            "from": 100000,
+            "to": 120000
+          }
+          ,
+          {
+            "from": 120000,
+            "to": 140000
+          }
+          ,
+          {
+            "from": 140000,
+            "to": 160000
+          }
+          ,
+          {
+            "from": 160000,
+            "to": 180000
+          }
+          ,
+          {
+            "from": 180000,
+            "to": 200000
+          }
+          ,
+          {
+            "from": 200000
+          }
+        ]
+      }
+    }
+  },
+  "size": 0
+}
+//امکان تعیین نام برای هر گروه
+
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byUsage": {
+      "range": {
+        "field": "usage",
+        "ranges": [
+          {
+            "key":"شروع"
+            "to": 100000
+          },
+          {
+            "from": 100000,
+            "to": 120000
+          }
+          ,
+          {
+            "from": 120000,
+            "to": 140000
+          }
+          ,
+          {
+            "from": 140000,
+            "to": 160000
+          }
+          ,
+          {
+            "from": 160000,
+            "to": 180000
+          }
+          ,
+          {
+            "from": 180000,
+            "to": 200000
+          }
+          ,
+          {
+            "from": 200000,
+            "key":"پایان"
+          }
+        ]
+      }
+    }
+  },
+  "size": 0
+}
+
+// میتوان همزمان با Agg از queryهم استفاده کرد
+GET /bigginsight/_search
+{
+  "query": {
+    "match": {
+      "customer": "Linkedin"
+    }
+    
+  },
+  "aggs": {
+    "NAME": {
+      "terms": {
+        "field": "category"
+
+      }
+    }
+  }
+}
+//همه انواع جستجو قابل استفاده است
+GET /bigginsight/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {
+          "customer": "Linkedin"
+        }
+        },
+        {"range": {
+          "time": {
+            "gte": 1506277800000,
+            "lte": 1506294200000
+          }
+        }}
+      ]
+    }
+  },
+  "aggs": {
+    "byCategory": {
+      "terms": {
+        "field": "category"
+    
+      }
+    }
+  },
+  "size": 0
+}
+
+//می‌توانیم داخل bucket aggregationها از نوع metric استفاده کنیم
+GET /bigginsight/_search
+{
+  "aggs": {
+    "byCategory": {
+      "terms": {
+        "field": "category",
+        "size": 10
+      },
+      "aggs": {
+        "maxusage": {
+          "stat": {
+            "field": "usage"
+          }
+        }
+      }
+    }
+  },
+  "size": 0
+}
+
+//میتوانیم از فیلتر‌ها داخل aggsها استفاده کنیم و برای یک شرط خاص محاسبات را انجام دهیم
+get /bigginsight/_search
+{
+  "aggs": {
+    "chat": {
+      "filter": {
+        "term": {
+          "category": "Chat"
+        }
+      }
+    }
+  },
+  "size":0
+}
+//امکان ارسال چندین شرط برای دسته بندی
+GET /bigginsight/_search
+{
+  "aggs": {
+    "messages": {
+      "filters": {
+        "filters": {
+        "chat": { "match": { "category": "Chat" }},
+        "skype": { "match": { "application": "Skype" }},
+          "other_than_skype": {
+            "bool": {
+              "must": {"match": {"category": "Chat"}},
+              "must_not": {"match": {"application": "Skype"}}
+            }
+          }
+        }
+      }
+    }
+  },
+  "size":0
+}
+
+//دسته بندی داده ها در بازه زمانی
+GET /bigginsight/_search
+{
+  "aggs": {
+    "counts_over_time": {
+        "date_histogram": {
+          "field": "time",
+          "interval": "1d",
+        }
+    }
+  },
+  "size":0
+}
+// تعیین محدوده زمانی ایران برای دسته بندی روی زمان
+GET /bigginsight/_search
+{
+  "aggs": {
+    "counts_over_time": {
+        "date_histogram": {
+          "field": "time",
+          "fixed_interval": "1d",
+          "time_zone": "+03:30"
+        }
+    }
+  },
+  "size":0
+}
+//محدود کردن داده‌ها 
+GET /bigginsight/_search
+{
+  "query":{
+     "term":{
+        "customer":"Linkedin"
+     }
+  },
+  "aggs":{
+     "counts_over_time":{
+        "date_histogram":{
+           "field":"time",
+           "fixed_interval":"1d",
+           "time_zone":"+03:30"
+        },
+        "aggs":{
+           "total_bandwidth":{
+
+           }
+        }
+     }
+  },
+  "size":0
+}
+//استفاده همزمان شرط برای تعیین محدوده داده‌ها
+//استفاده از تاریخ برای گروه بندی داده‌ها
+// به دست آوردن متریک داخل هر گروه
+GET /bigginsight/_search
+{
+  "query":{
+     "term":{
+        "customer":"Linkedin"
+     }
+  },
+  "aggs":{
+     "counts_over_time":{
+        "date_histogram":{
+           "field":"time",
+           "fixed_interval":"1d",
+           "time_zone":"+03:30"
+        },
+        "aggs":{
+           "total_bandwidth":{
+              "avg": {
+                "field": "usage"
+              }
+           }
+        }
+     }
+  },
+  "size":0
+}
+
+//استفاده از داده‌های مختصات برای دسته بندی داده‌ها
+GET bigginsight/_search
+{
+   "aggs":{
+      "geo_hash":{
+         "geohash_grid":{
+            "field":"location",
+            "precision":7
+         }
+      }
+   },
+   "size":0
+}
+
+//دسته بندی داده‌های با فاصله از یک نقطه
+GET bigginsight/_search
+{
+   "aggs":{
+      "within_radius":{
+         "geo_distance":{
+            "field":"location",
+            "origin":{
+               "lat":23.102869,
+               "lon":72.595692
+            },
+            "ranges":[
+               {
+                  "to":10
+               }
+            ]
+         }
+      }
+   },
+   "size":0
+}
+//pipline
+//استفاده از نتیجه یک مرحله agg برای محاسبه یک aggregation دیگر
+GET /bigginsight/_search?size=0
+{
+   "query":{
+      "bool":{
+         "must":[
+            {
+               "term":{
+                  "customer":"Linkedin"
+               }
+            },
+            {
+               "range":{
+                  "time":{
+                     "gte":1506277800000
+                  }
+               }
+            }
+         ]
+      }
+   },
+   "aggs":{
+      "counts_over_time":{
+         "date_histogram":{
+            "field":"time",
+            "fixed_interval":"1h",
+            "time_zone":"+05:30"
+         },
+         "aggs":{
+            "hourly_usage":{
+               "sum":{
+                  "field":"usage"
+               }
+            },
+            "cumulative_hourly_usage":{
+               "cumulative_sum":{
+                  "buckets_path":"hourly_usage"
+               }
+            }
+         }
+      }
+   }
+}

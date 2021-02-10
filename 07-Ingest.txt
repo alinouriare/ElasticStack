@@ -1,0 +1,79 @@
+GET /_ingest/pipeline
+
+PUT /_ingest/pipeline/firstpipline
+{
+  "description": "first pipline uppercase vlaue ",
+  "processors": [
+    {
+      "uppercase": {
+        "field": "message"
+      }
+    }
+  ]
+  
+}
+
+
+PUT /_ingest/pipeline/secondpipline
+{
+  "description": "second pipline",
+  "processors": [
+    {
+      "uppercase": {
+        "field": "message",
+        "ignore_failure": false
+      },
+      "rename": {
+        "field": "message",
+        "target_field": "data",
+         "ignore_failure": false
+      },
+      "set": {
+        "field": "lable",
+        "value": "testlable",
+        "ignore_failure": false
+      }
+    }
+  ]
+}
+
+
+PUT /myindex/_doc/2?pipeline=firstpipline
+{
+  
+  "message":"this is object one"
+}
+
+
+PUT /myindex/_doc/3?pipeline=secondpipline
+{
+  
+  "message":"this is object one"
+}
+
+PUT /myindex/_doc/4?pipeline=ipcon
+{
+  "ip":"2.178.102.86"
+}
+
+PUT /_ingest/pipeline/ipcon
+{
+  "description": "ip con",
+  "processors": [
+    {
+      "geoip": {
+        "field": "ip",
+        "ignore_missing": false
+      }
+    }
+  ]
+  
+}
+
+
+
+
+
+
+
+

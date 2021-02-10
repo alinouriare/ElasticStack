@@ -1,0 +1,17 @@
+Trial Run
+-------------------
+C:\Elastic\elasticsearch-7.10.2\config\elasticsearch.yml
+end file append ========>
+xpack.security.enabled: true 
+
+
+run cmd =======>
+C:\Elastic\elasticsearch-7.10.2\bin>elasticsearch-setup-passwords interactive
+set password for users
+
+kibna:
+C:\Elastic\kibana-7.10.2-windows-x86_64\config\kibana.yml
+elasticsearch.username: "kibana"
+elasticsearch.password: "kibana"
+--------------------------------------
+watcher alert

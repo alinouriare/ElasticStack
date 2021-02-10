@@ -1,0 +1,6 @@
+curl -s -H "Content-Type: application/json" -u user1:1366315 -XGET http://localhost:9200
+
+curl -u user2:1366315 "http://localhost:9200/employee/_search?pretty"
+
+curl -u depuser:1366315 "http://localhost:9200/department/_search?pretty"
+

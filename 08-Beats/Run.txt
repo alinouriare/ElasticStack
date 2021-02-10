@@ -1,0 +1,11 @@
+https://www.elastic.co/downloads/beats/filebeat
+config file filebeat.yml
+cmd admin
+C:\Elastic\filebeat-7.10.2-windows-x86_64>filebeat.exe
+C:\Elastic\filebeat-7.10.2-windows-x86_64>filebeat.exe setup --dashboards
+
+https://www.elastic.co/downloads/beats/metricbeat
+C:\Elastic\metricbeat-7.10.2-windows-x86_64\metricbeat-7.10.2-windows-x86_64>metricbeat.exe
+C:\Elastic\metricbeat-7.10.2-windows-x86_64\metricbeat-7.10.2-windows-x86_64>metricbeat.exe setup --dashboards
+
+Winlog-healthcheck

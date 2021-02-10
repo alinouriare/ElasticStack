@@ -1,0 +1,5 @@
+java install
+image jdbc config
+run file 2
+
+C:\Elastic\logstash-7.10.2-windows-x86_64\logstash-7.10.2\bin>logstash -f ..\file\2.conf

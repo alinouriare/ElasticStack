@@ -1,0 +1,263 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.API\\BlogEngine.PostManagement.API.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Events\\BlogEngine.Shared.Events.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Events\\BlogEngine.Shared.Events.csproj",
+        "projectName": "BlogEngine.Shared.Events",
+        "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Events\\BlogEngine.Shared.Events.csproj",
+        "packagesPath": "C:\\Users\\alino\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Events\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\alino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Masstransit\\BlogEngine.Shared.Masstransit.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Masstransit\\BlogEngine.Shared.Masstransit.csproj",
+        "projectName": "BlogEngine.Shared.Masstransit",
+        "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Masstransit\\BlogEngine.Shared.Masstransit.csproj",
+        "packagesPath": "C:\\Users\\alino\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Masstransit\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\alino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.API\\BlogEngine.PostManagement.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.API\\BlogEngine.PostManagement.API.csproj",
+        "projectName": "BlogEngine.PostManagement.API",
+        "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.API\\BlogEngine.PostManagement.API.csproj",
+        "packagesPath": "C:\\Users\\alino\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\alino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Events\\BlogEngine.Shared.Events.csproj": {
+                "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Events\\BlogEngine.Shared.Events.csproj"
+              },
+              "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Masstransit\\BlogEngine.Shared.Masstransit.csproj": {
+                "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\00. Shared\\BlogEngine.Shared.Masstransit\\BlogEngine.Shared.Masstransit.csproj"
+              },
+              "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.Models\\BlogEngine.PostManagement.Models.csproj": {
+                "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.Models\\BlogEngine.PostManagement.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.6.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.Models\\BlogEngine.PostManagement.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.Models\\BlogEngine.PostManagement.Models.csproj",
+        "projectName": "BlogEngine.PostManagement.Models",
+        "projectPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.Models\\BlogEngine.PostManagement.Models.csproj",
+        "packagesPath": "C:\\Users\\alino\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alino\\OneDrive\\Desktop\\ElasticStack\\02-UseNoSql\\BlogEngine\\01. Post Management\\BlogEngine.PostManagement.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\alino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.11.5, )"
+            },
+            "mongocsharpdriver": {
+              "target": "Package",
+              "version": "[2.11.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
